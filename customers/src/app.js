@@ -4,10 +4,11 @@ console.log(uuidv4());
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+mongoose.set('strichtQuery', false)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const customers = [
   {
@@ -105,6 +106,13 @@ const json = {
 app.get('/data', (req, res) => {
   res.json(json);
 });
+
+const start = async() => {
+try {
+  await mongoose.connect('mongodb+srv://Caleb:notepass')
+}
+
+}
 
 app.post('/', (req, res) => {
   res.send('Hello Hamed');
